@@ -6,27 +6,22 @@ public class PathFollowerView : MonoBehaviour
 {
     private EntityManager entityManager;
     private Entity trackedEntity;
-    private bool hasEntity;
+    private EntityQuery query;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        query = entityManager.CreateEntityQuery(typeof(PathFollowerTag));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!hasEntity)
+        if (!query.IsEmpty)
         {
-            EntityQuery query = entityManager.CreateEntityQuery(typeof(PathFollowerTag));
-            if (query.CalculateEntityCount() == 0)
-                return;
-
             trackedEntity = query.GetSingletonEntity();
-            hasEntity = true;
+            LocalTransform entityTransform = entityManager.GetComponentData<LocalTransform>(trackedEntity);
+            transform.position = entityTransform.Position;
         }
-
-        LocalTransform entityTransform = entityManager.GetComponentData<LocalTransform>(trackedEntity);
-        transform.position = entityTransform.Position;
     }
 }

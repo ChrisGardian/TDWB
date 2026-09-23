@@ -6,14 +6,15 @@ public partial class PathTestSpawnSystem : SystemBase
 {
     protected override void OnCreate()
     {
-        Entity entity = EntityManager.CreateEntity();
+        Entity bloon = EntityManager.CreateEntity();
 
-        EntityManager.AddComponentData(entity, new PathProgress { CurrentWaypointIndex = 0 });
-        EntityManager.AddComponentData(entity, new MoveSpeed { Value = 1f });
-        EntityManager.AddComponentData(entity, LocalTransform.FromPosition(0f, 0f, 0f));
-        EntityManager.AddComponent<PathFollowerTag>(entity);
+        EntityManager.AddComponentData(bloon, new PathProgress { CurrentWaypointIndex = 0 });
+        EntityManager.AddComponentData(bloon, new MoveSpeed { Value = 1f });
+        EntityManager.AddComponentData(bloon, LocalTransform.FromPosition(0f, 0f, 0f));
+        EntityManager.AddComponentData(bloon, new CurrentLayer { CurrentLayerIndex = 2 });
+        EntityManager.AddComponent<PathFollowerTag>(bloon);
 
-        DynamicBuffer<PathWaypoint> waypoints = EntityManager.AddBuffer<PathWaypoint>(entity);
+        DynamicBuffer<PathWaypoint> waypoints = EntityManager.AddBuffer<PathWaypoint>(bloon);
         waypoints.Add(new PathWaypoint { Value = new float3(0f, 0f, 0f)});
         waypoints.Add(new PathWaypoint { Value = new float3(5f, 0f, 0f)});
         waypoints.Add(new PathWaypoint { Value = new float3(5f, 3f, 0f)});
