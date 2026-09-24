@@ -13,10 +13,11 @@ public partial class PathTestSpawnSystem : SystemBase
         EntityManager.AddComponentData(bloon, LocalTransform.FromPosition(0f, 0f, 0f));
         EntityManager.AddComponentData(bloon, new CurrentLayer { CurrentLayerIndex = 2 });
         EntityManager.AddComponentData(bloon, new Size { Value = 0.3f});
-        EntityManager.AddComponent<PathFollowerTag>(bloon);
+        EntityManager.AddComponent<BloonTag>(bloon);
 
         Entity tower = EntityManager.CreateEntity();
 
+        EntityManager.AddComponent<TowerTag>(tower);
         EntityManager.AddComponentData(tower, LocalTransform.FromPosition(3f, 3f, 0f));
         EntityManager.AddComponentData(tower, new FireRate { TimeBetweenShots = 0.5f, TimeTillNextShot = 0f});
         EntityManager.AddComponentData(tower, new Range { Value = 3f});

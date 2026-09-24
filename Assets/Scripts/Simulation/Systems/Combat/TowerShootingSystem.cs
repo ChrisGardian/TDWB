@@ -2,7 +2,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using Unity.VisualScripting;
+using UnityEngine;
 
 public partial class TowerShootingSystem : SystemBase
 {
@@ -27,6 +27,8 @@ public partial class TowerShootingSystem : SystemBase
             if (EntityManager.GetComponentData<FireRate>(tower).TimeTillNextShot <= 0)
             {
                 Entity projectile = EntityManager.CreateEntity();
+
+                Debug.Log("Projectile Launched");
 
                 Entity target = EntityManager.GetComponentData<Target>(tower).Value;
 

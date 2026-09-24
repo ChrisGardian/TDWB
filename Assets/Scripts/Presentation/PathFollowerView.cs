@@ -11,7 +11,7 @@ public class PathFollowerView : MonoBehaviour
     void Start()
     {
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        query = entityManager.CreateEntityQuery(typeof(PathFollowerTag));
+        query = entityManager.CreateEntityQuery(typeof(BloonTag));
     }
 
     // Update is called once per frame
