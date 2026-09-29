@@ -7,14 +7,14 @@ using UnityEngine;
 public partial class TowerShootingSystem : SystemBase
 {
     private EntityQuery TowerQuery;
-    private EntityQuery BloonQuery;
+    // private EntityQuery BloonQuery;
     protected override void OnCreate()
     {
         TowerQuery = new EntityQueryBuilder(Allocator.Temp)
             .WithAll<TowerTag>()
             .WithAll<Target>()
             .Build(this);
-        BloonQuery = EntityManager.CreateEntityQuery(typeof(BloonTag));
+        // BloonQuery = EntityManager.CreateEntityQuery(typeof(BloonTag));
     }
     protected override void OnUpdate()
     {
@@ -28,8 +28,6 @@ public partial class TowerShootingSystem : SystemBase
             {
                 Entity projectile = EntityManager.CreateEntity();
 
-                Debug.Log("Projectile Launched");
-
                 Entity target = EntityManager.GetComponentData<Target>(tower).Value;
 
                 EntityManager.AddComponent<ProjectileTag>(projectile);
@@ -39,7 +37,6 @@ public partial class TowerShootingSystem : SystemBase
                 EntityManager.AddComponentData(projectile, new Size { Value = .1f });
                 EntityManager.AddComponentData(projectile, new Target { Value = target });
 
-                
                 float3 targetPosition = EntityManager.GetComponentData<LocalTransform>(target).Position;
                 float3 towerPosition = EntityManager.GetComponentData<LocalTransform>(tower).Position;
                 float3 direction = math.normalize(targetPosition - towerPosition);
