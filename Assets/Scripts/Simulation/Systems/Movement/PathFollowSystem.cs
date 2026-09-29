@@ -4,19 +4,29 @@ using Unity.Transforms;
 
 public partial class PathFollowSystem : SystemBase
 {
+    protected override void OnCreate()
+    {
+        RequireForUpdate<BloonSpeedScale>();
+        RequireForUpdate<PathWaypoint>();
+    }
+
     protected override void OnUpdate()
     {
         float deltaTime = SystemAPI.Time.DeltaTime;
 
-        foreach (var (transform, progress, speed, waypoints) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<PathProgress>, RefRO<MoveSpeed>, DynamicBuffer<PathWaypoint>>())
+        float speedScale = SystemAPI.GetSingleton<BloonSpeedScale>().Value;
+
+        DynamicBuffer<PathWaypoint> waypoints = SystemAPI.GetSingletonBuffer<PathWaypoint>(true);
+
+        foreach (var (transform, progress, speed) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<PathProgress>, RefRO<MoveSpeed>>().WithAll<BloonTag>())
         {
             if (progress.ValueRO.CurrentWaypointIndex >= waypoints.Length)
-                       continue;
+                continue;
             
             float3 target = waypoints[progress.ValueRO.CurrentWaypointIndex].Value;
             float3 current = transform.ValueRO.Position;
             float distance = math.distance(current, target);
-            float step = speed.ValueRO.Value * deltaTime;
+            float step = speed.ValueRO.Value * speedScale * deltaTime;
 
             if (step >= distance)
             {
