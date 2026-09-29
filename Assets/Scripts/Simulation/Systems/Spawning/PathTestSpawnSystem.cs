@@ -1,6 +1,5 @@
 using Unity.Entities;
 using Unity.Transforms;
-using Unity.Mathematics;
 
 public partial class PathTestSpawnSystem : SystemBase
 {
@@ -24,12 +23,9 @@ public partial class PathTestSpawnSystem : SystemBase
 
         Entity redBloon = EntityManager.Instantiate(redBloonPrefab);
 
-        EntityManager.SetComponentData(redBloon, LocalTransform.FromPosition(0f, 0f, 0f));
+        DynamicBuffer<PathWaypoint> waypoints = SystemAPI.GetSingletonBuffer<PathWaypoint>(true);
 
-        DynamicBuffer<PathWaypoint> waypoints = EntityManager.AddBuffer<PathWaypoint>(redBloon);
-        waypoints.Add(new PathWaypoint { Value = new float3(0f, 0f, 0f)});
-        waypoints.Add(new PathWaypoint { Value = new float3(5f, 0f, 0f)});
-        waypoints.Add(new PathWaypoint { Value = new float3(5f, 3f, 0f)});
+        EntityManager.SetComponentData(redBloon, LocalTransform.FromPosition(waypoints[0].Value));
 
         Enabled = false;
     }

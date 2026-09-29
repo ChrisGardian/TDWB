@@ -7,17 +7,21 @@ public partial class PathFollowSystem : SystemBase
     protected override void OnCreate()
     {
         RequireForUpdate<BloonSpeedScale>();
+        RequireForUpdate<PathWaypoint>();
     }
+
     protected override void OnUpdate()
     {
         float deltaTime = SystemAPI.Time.DeltaTime;
 
         float speedScale = SystemAPI.GetSingleton<BloonSpeedScale>().Value;
 
-        foreach (var (transform, progress, speed, waypoints) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<PathProgress>, RefRO<MoveSpeed>, DynamicBuffer<PathWaypoint>>())
+        DynamicBuffer<PathWaypoint> waypoints = SystemAPI.GetSingletonBuffer<PathWaypoint>(true);
+
+        foreach (var (transform, progress, speed) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<PathProgress>, RefRO<MoveSpeed>>().WithAll<BloonTag>())
         {
             if (progress.ValueRO.CurrentWaypointIndex >= waypoints.Length)
-                       continue;
+                continue;
             
             float3 target = waypoints[progress.ValueRO.CurrentWaypointIndex].Value;
             float3 current = transform.ValueRO.Position;
