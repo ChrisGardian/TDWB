@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BloonRegistryAuthoring : MonoBehaviour
 {
-    public GameObject RedBloon;
+    public GameObject Bloon;
 }
 
 public class BloonRegistryBaker : Baker<BloonRegistryAuthoring>
@@ -11,8 +11,8 @@ public class BloonRegistryBaker : Baker<BloonRegistryAuthoring>
     public override void Bake(BloonRegistryAuthoring authoring)
     {
         Entity entity = GetEntity(TransformUsageFlags.None);
-        Entity redBloonPrefab = GetEntity(authoring.RedBloon, TransformUsageFlags.Dynamic);
+        Entity BloonPrefab = GetEntity(authoring.Bloon, TransformUsageFlags.Dynamic);
 
-        AddComponent(entity, new BloonPrefabRegistry { RedBloon = redBloonPrefab });
+        AddComponent(entity, new BloonPrefabRegistry { RedBloon = BloonPrefab });
     } 
 }

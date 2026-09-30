@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe39ba8c5afbf0041a3f66de1ca4aaad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloonRegistryAuthoring
-  RedBloon: {fileID: 4684603874968497491, guid: 60b475d60ebb0d94882614a73ede1631, type: 3}
+  Bloon: {fileID: 4684603874968497491, guid: 8596d5f9dffb36c4eb5e41cbd42bfc76, type: 3}
 --- !u!1 &395047947
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a188d464ba19d2946b9a5110c7d3dc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloonSpeedScaleAuthoring
-  Value: 0.3
+  Value: 1
 --- !u!1 &1354079924
 GameObject:
   m_ObjectHideFlags: 0

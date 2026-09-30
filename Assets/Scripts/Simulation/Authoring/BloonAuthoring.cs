@@ -6,6 +6,7 @@ public class BloonAuthoring : MonoBehaviour
     public float MoveSpeed;
     public float Size;
     public int CurrentLayer;
+    public GameObject[] Children;
 }
 
 public class BloonBaker : Baker<BloonAuthoring>
@@ -13,6 +14,13 @@ public class BloonBaker : Baker<BloonAuthoring>
     public override void Bake(BloonAuthoring authoring)
     {
         Entity entity = GetEntity(TransformUsageFlags.Dynamic);
+
+        DynamicBuffer<BloonChild> children = AddBuffer<BloonChild>(entity);
+        foreach (GameObject child in authoring.Children)
+        {
+            Entity childPrefab = GetEntity(child, TransformUsageFlags.Dynamic);
+            children.Add(new BloonChild { Value = childPrefab });
+        }
 
         AddComponent<BloonTag>(entity);
         AddComponent(entity, new MoveSpeed { Value = authoring.MoveSpeed });
