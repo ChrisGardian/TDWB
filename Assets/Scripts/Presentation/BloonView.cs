@@ -4,9 +4,9 @@ using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
-public class TowerView : MonoBehaviour
+public class BloonView : MonoBehaviour
 {
-    [SerializeField] private GameObject towerPrefab;
+    [SerializeField] private GameObject bloonPrefab;
     private Dictionary<Entity, GameObject> entityViews;
     private EntityManager entityManager;
     private EntityQuery query;
@@ -16,30 +16,32 @@ public class TowerView : MonoBehaviour
     {
         entityViews = new Dictionary<Entity, GameObject>();
         entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        query = entityManager.CreateEntityQuery(typeof(TowerTag));
+        query = entityManager.CreateEntityQuery(typeof(BloonTag));
         toDestroy = new List<Entity>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        NativeArray<Entity> towers = query.ToEntityArray(Allocator.Temp);
+        NativeArray<Entity> bloons = query.ToEntityArray(Allocator.Temp);
 
-        foreach (Entity tower in towers)
+        foreach (Entity bloon in bloons)
         {
-            LocalTransform localTransform = entityManager.GetComponentData<LocalTransform>(tower);
-            if (entityViews.TryGetValue(tower, out GameObject go))
+            LocalTransform localTransform = entityManager.GetComponentData<LocalTransform>(bloon);
+            if (entityViews.TryGetValue(bloon, out GameObject go))
             {
                 go.transform.position = localTransform.Position;
             }
             else
             {
-                GameObject newGo = Instantiate(towerPrefab, localTransform.Position, Quaternion.identity, transform);
-                entityViews[tower] = newGo;
+                Size size = entityManager.GetComponentData<Size>(bloon);
+                GameObject newGo = Instantiate(bloonPrefab, localTransform.Position, Quaternion.identity, transform);
+                newGo.transform.localScale = Vector3.one * (2f * size.Value);
+                entityViews[bloon] = newGo;
             }
         }
 
-        towers.Dispose();
+        bloons.Dispose();
 
         foreach (Entity entity in entityViews.Keys)
         {
