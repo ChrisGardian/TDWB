@@ -5,7 +5,6 @@ public class BloonAuthoring : MonoBehaviour
 {
     public float MoveSpeed;
     public float Size;
-    public int CurrentLayer;
     public GameObject[] Children;
 }
 
@@ -25,7 +24,6 @@ public class BloonBaker : Baker<BloonAuthoring>
         AddComponent<BloonTag>(entity);
         AddComponent(entity, new MoveSpeed { Value = authoring.MoveSpeed });
         AddComponent(entity, new Size { Value = authoring.Size });
-        AddComponent(entity, new CurrentLayer { CurrentLayerIndex = authoring.CurrentLayer });
         AddComponent(entity, new PathProgress());
     } 
 }

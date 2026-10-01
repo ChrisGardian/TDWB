@@ -13,6 +13,6 @@ public class BloonRegistryBaker : Baker<BloonRegistryAuthoring>
         Entity entity = GetEntity(TransformUsageFlags.None);
         Entity BloonPrefab = GetEntity(authoring.Bloon, TransformUsageFlags.Dynamic);
 
-        AddComponent(entity, new BloonPrefabRegistry { RedBloon = BloonPrefab });
+        AddComponent(entity, new BloonPrefabRegistry { Bloon = BloonPrefab });
     } 
 }

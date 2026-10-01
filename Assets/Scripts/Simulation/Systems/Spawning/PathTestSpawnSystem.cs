@@ -27,7 +27,7 @@ public partial class PathTestSpawnSystem : SystemBase
     {
         BloonPrefabRegistry registry = SystemAPI.GetSingleton<BloonPrefabRegistry>();
 
-        Entity redBloonPrefab = registry.RedBloon;
+        Entity redBloonPrefab = registry.Bloon;
 
         Entity redBloon = EntityManager.Instantiate(redBloonPrefab);
         Entity redBloon1 = EntityManager.Instantiate(redBloonPrefab);
