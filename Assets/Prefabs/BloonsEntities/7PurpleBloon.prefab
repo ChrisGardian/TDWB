@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 846975338150055606}
   - component: {fileID: 8816373075322955380}
   m_Layer: 0
-  m_Name: RedBloon
+  m_Name: 7PurpleBloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b4f49dd6a739d45ac90cc46f7e2252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloonAuthoring
-  MoveSpeed: 1
+  MoveSpeed: 3
   Size: 0.5
-  CurrentLayer: 0
+  Children:
+  - {fileID: 4684603874968497491, guid: 72ebe1039b03cc64aa89e50676b2b257, type: 3}
+  - {fileID: 4684603874968497491, guid: 72ebe1039b03cc64aa89e50676b2b257, type: 3}
