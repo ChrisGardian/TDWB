@@ -20,10 +20,10 @@ public partial class PathFollowSystem : SystemBase
 
         foreach (var (transform, progress, speed) in SystemAPI.Query<RefRW<LocalTransform>, RefRW<PathProgress>, RefRO<MoveSpeed>>().WithAll<BloonTag>())
         {
-            if (progress.ValueRO.CurrentWaypointIndex >= waypoints.Length)
+            if (progress.ValueRO.Value >= waypoints.Length)
                 continue;
             
-            float3 target = waypoints[progress.ValueRO.CurrentWaypointIndex].Value;
+            float3 target = waypoints[progress.ValueRO.Value].Value;
             float3 current = transform.ValueRO.Position;
             float distance = math.distance(current, target);
             float step = speed.ValueRO.Value * speedScale * deltaTime;
@@ -31,7 +31,7 @@ public partial class PathFollowSystem : SystemBase
             if (step >= distance)
             {
                 transform.ValueRW.Position = target;
-                progress.ValueRW.CurrentWaypointIndex++;                
+                progress.ValueRW.Value++;                
             }
             else
             {

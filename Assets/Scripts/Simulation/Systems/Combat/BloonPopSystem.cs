@@ -10,6 +10,7 @@ public partial class BloonPopSystem : SystemBase
     EntityQuery ProjectileQuery;
     protected override void OnCreate()
     {
+        RequireForUpdate<PathWaypoint>();
         Query = EntityManager.CreateEntityQuery(typeof(HitTag));
         TowerQuery = new EntityQueryBuilder(Allocator.Temp)
             .WithAll<TowerTag>()
@@ -25,6 +26,7 @@ public partial class BloonPopSystem : SystemBase
         NativeArray<Entity> bloons = Query.ToEntityArray(Allocator.Temp);
         NativeArray<Entity> towers = TowerQuery.ToEntityArray(Allocator.Temp);
         NativeArray<Entity> projectiles = ProjectileQuery.ToEntityArray(Allocator.Temp);
+        NativeArray<PathWaypoint> pathWaypoints = SystemAPI.GetSingletonBuffer<PathWaypoint>(true).ToNativeArray(Allocator.Temp);
 
         foreach (Entity bloon in bloons)
         {
@@ -33,16 +35,39 @@ public partial class BloonPopSystem : SystemBase
 
             NativeArray<BloonChild> bloonChildren = EntityManager.GetBuffer<BloonChild>(bloon).ToNativeArray(Allocator.Temp);
 
-            float3 decalage = new float3(0.1f, 0f, 0f);
+            float gap = 0.1f;
+            float3 direction;
+            int pathProgressValue = pathProgress.Value;
+
+            if (0 < pathProgressValue && pathProgressValue < pathWaypoints.Length)
+            {
+                float3 waypointNext = pathWaypoints[pathProgressValue].Value;
+                float3 waypointBefore = pathWaypoints[pathProgressValue - 1].Value;
+                direction = math.normalizesafe(waypointNext - waypointBefore);
+            }
+            else if (pathProgressValue == 0)
+            {
+                float3 waypointNext = pathWaypoints[pathProgressValue + 1].Value;
+                float3 waypointBefore = pathWaypoints[pathProgressValue].Value;
+                direction = math.normalizesafe(waypointNext - waypointBefore);
+            }
+            else
+            {
+                direction = float3.zero;
+            }
+
+            float3 gapVector = gap * direction;
+
             int i = 0;
 
             foreach (BloonChild child in bloonChildren)
             {
-                float3 decalageCopy = decalage * i++;
-                localTransform.Position = localTransform.Position - decalageCopy;
+                float3 gapCopy = gapVector * i++;
+                LocalTransform childTransform = localTransform;
+                childTransform.Position = localTransform.Position - gapCopy;
 
                 Entity childBloon = EntityManager.Instantiate(child.Value);
-                EntityManager.SetComponentData(childBloon, localTransform);
+                EntityManager.SetComponentData(childBloon, childTransform);
                 EntityManager.SetComponentData(childBloon, pathProgress);
             }
 
@@ -72,5 +97,6 @@ public partial class BloonPopSystem : SystemBase
         bloons.Dispose();
         towers.Dispose();
         projectiles.Dispose();
+        pathWaypoints.Dispose();
     }
 }
