@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BloonView : MonoBehaviour
 {
-    [SerializeField] private GameObject bloonPrefab;
+    [SerializeField] private List<GameObject> bloonPrefabs;
     private Dictionary<Entity, GameObject> entityViews;
     private EntityManager entityManager;
     private EntityQuery query;
@@ -35,6 +35,9 @@ public class BloonView : MonoBehaviour
             else
             {
                 Size size = entityManager.GetComponentData<Size>(bloon);
+                BloonType type = entityManager.GetComponentData<BloonType>(bloon);
+                int index = (int)type.Value;
+                GameObject bloonPrefab = bloonPrefabs[index];
                 GameObject newGo = Instantiate(bloonPrefab, localTransform.Position, Quaternion.identity, transform);
                 newGo.transform.localScale = Vector3.one * (2f * size.Value);
                 entityViews[bloon] = newGo;

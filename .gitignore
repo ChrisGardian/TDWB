@@ -116,3 +116,6 @@ InitTestScene*.unity*
 
 *.md
 .claude/
+
+/Assets/Art/BTD6/
+/Assets/Art/BTD6.meta

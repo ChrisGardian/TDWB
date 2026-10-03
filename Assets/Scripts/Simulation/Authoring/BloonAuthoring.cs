@@ -6,6 +6,7 @@ public class BloonAuthoring : MonoBehaviour
     public float MoveSpeed;
     public float Size;
     public GameObject[] Children;
+    public BloonKind Kind;
 }
 
 public class BloonBaker : Baker<BloonAuthoring>
@@ -25,5 +26,6 @@ public class BloonBaker : Baker<BloonAuthoring>
         AddComponent(entity, new MoveSpeed { Value = authoring.MoveSpeed });
         AddComponent(entity, new Size { Value = authoring.Size });
         AddComponent(entity, new PathProgress());
+        AddComponent(entity, new BloonType { Value = authoring.Kind });
     } 
 }

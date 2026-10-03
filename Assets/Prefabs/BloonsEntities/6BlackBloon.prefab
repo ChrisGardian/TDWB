@@ -49,3 +49,4 @@ MonoBehaviour:
   Children:
   - {fileID: 4684603874968497491, guid: 72ebe1039b03cc64aa89e50676b2b257, type: 3}
   - {fileID: 4684603874968497491, guid: 72ebe1039b03cc64aa89e50676b2b257, type: 3}
+  BloonKind: 5

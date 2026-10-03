@@ -48,3 +48,4 @@ MonoBehaviour:
   Size: 0.5
   Children:
   - {fileID: 4684603874968497491}
+  BloonKind: 2
