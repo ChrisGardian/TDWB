@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9164928224102197004}
   - component: {fileID: 5407620548168531188}
   m_Layer: 0
-  m_Name: 1RedBloon
+  m_Name: 5PinkBloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1982135918423939577, guid: e88d3404d51ad504590df3486b681ef7, type: 3}
+  m_Sprite: {fileID: 3097513635226613377, guid: e72d5746ca958ad4bb7f0a42490d3cd1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

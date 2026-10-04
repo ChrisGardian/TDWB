@@ -47,5 +47,5 @@ MonoBehaviour:
   MoveSpeed: 1.8
   Size: 0.5
   Children:
-  - {fileID: 4684603874968497491}
-  BloonKind: 2
+  - {fileID: 4684603874968497491, guid: 8596d5f9dffb36c4eb5e41cbd42bfc76, type: 3}
+  Kind: 0

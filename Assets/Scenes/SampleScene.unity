@@ -163,7 +163,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78df1764009c57b46b0f9b30a26d28f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloonView
-  bloonPrefab: {fileID: 2203410533942160027, guid: cd0f21e56411668438a39cef3c8d009e, type: 3}
+  bloonPrefabs:
+  - {fileID: 2203410533942160027, guid: cd0f21e56411668438a39cef3c8d009e, type: 3}
+  - {fileID: 2203410533942160027, guid: 84db4ebaf9d2b8c4e8935c7e2ea51033, type: 3}
+  - {fileID: 2203410533942160027, guid: 5b749a7a0c4fc0246aaa95c9f0df5b99, type: 3}
+  - {fileID: 2203410533942160027, guid: 746fb9f37c8d79543b0176ba882fc271, type: 3}
+  - {fileID: 2203410533942160027, guid: a594fd6197207934d8eeb77ffe827c5b, type: 3}
+  - {fileID: 2203410533942160027, guid: 82d509bef08b7e845b2d721bf53e7703, type: 3}
+  - {fileID: 2203410533942160027, guid: 7dde396b4f85d064a95aa4ac74c26dfa, type: 3}
+  - {fileID: 2203410533942160027, guid: ec7d3dec736f08345a2c8beb0441558e, type: 3}
+  - {fileID: 2203410533942160027, guid: 1e8937c3c42af854e8a2515ed1e661b8, type: 3}
+  - {fileID: 2203410533942160027, guid: 08a2c473c47ccc9438d3bff83e6b567d, type: 3}
+  - {fileID: 2203410533942160027, guid: cad3fed4506ebf44994f564b747deb52, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
