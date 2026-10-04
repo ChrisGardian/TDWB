@@ -1,12 +1,13 @@
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BloonAuthoring : MonoBehaviour
 {
     public float MoveSpeed;
     public float Size;
     public GameObject[] Children;
-    public BloonKind Kind;
+    [FormerlySerializedAs("BloonKind")] public BloonKind Kind;
 }
 
 public class BloonBaker : Baker<BloonAuthoring>

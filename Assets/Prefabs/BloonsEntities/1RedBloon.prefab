@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloonAuthoring
   MoveSpeed: 1
-  Size: 0.5
-  CurrentLayer: 0
+  Size: 0.25
+  Children: []
+  Kind: 0

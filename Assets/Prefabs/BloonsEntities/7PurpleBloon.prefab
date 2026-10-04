@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloonAuthoring
   MoveSpeed: 3
-  Size: 0.5
+  Size: 0.25
   Children:
   - {fileID: 4684603874968497491, guid: 72ebe1039b03cc64aa89e50676b2b257, type: 3}
   - {fileID: 4684603874968497491, guid: 72ebe1039b03cc64aa89e50676b2b257, type: 3}
-  BloonKind: 6
+  Kind: 6
